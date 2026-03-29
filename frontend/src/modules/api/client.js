@@ -3,6 +3,10 @@ const API_BASE = import.meta.env.VITE_API_URL
   ? `${String(import.meta.env.VITE_API_URL).replace(/\/$/, '')}/api`
   : '/api';
 
+if (import.meta.env.DEV) {
+  console.info('[NILETRON] API base →', API_BASE);
+}
+
 function getToken() {
   return localStorage.getItem('niletron_token');
 }

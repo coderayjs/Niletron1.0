@@ -2,11 +2,11 @@
 #define CONFIG_H
 
 // WiFi
-#define WIFI_SSID     "sukuna"
-#define WIFI_PASSWORD "12345678"
+#define WIFI_SSID     "MTN_4G_C378B4"
+#define WIFI_PASSWORD "18914264"
 
-// API: base URL of your backend (no trailing slash). Use your PC's IP when testing locally.
-#define API_BASE_URL  "http://172.20.10.2:4009"
+// API: base URL of your backend (no trailing slash). Render in production; use LAN IP for offline dev.
+#define API_BASE_URL  "https://niletron1-0.onrender.com"
 
 // Board identity: must match the board_id and secret_key registered in the web app (Admin → Boards).
 #define BOARD_ID      "NILE_SEN_020"
