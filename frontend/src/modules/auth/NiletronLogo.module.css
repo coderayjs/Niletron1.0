@@ -1,0 +1,57 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--accent);
+}
+
+.logo.mark {
+  flex-shrink: 0;
+}
+
+/* Auth: centered, stacked, prominent */
+.auth {
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth .mark {
+  filter: drop-shadow(0 4px 12px rgba(34, 194, 218, 0.25));
+}
+
+.auth .wordmark {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+
+/* Sidebar / inline: horizontal */
+.sidebar {
+  gap: 0.65rem;
+}
+
+.sidebar .wordmark {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.door {
+  fill: var(--bg);
+  opacity: 0.9;
+}
+
+.innerDot {
+  fill: var(--bg);
+}
+
+.hub {
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.85; }
+}

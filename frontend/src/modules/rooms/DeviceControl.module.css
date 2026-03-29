@@ -1,0 +1,83 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface2);
+  border-radius: 12px;
+  font-size: 1.5rem;
+}
+
+.name {
+  flex: 1;
+  font-weight: 500;
+}
+
+.toggle {
+  padding: 0.5rem 1rem;
+  min-width: 72px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.toggle.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--bg);
+}
+
+.toggle:disabled {
+  opacity: 0.7;
+}
+
+.fanControl {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 140px;
+}
+
+.slider {
+  flex: 1;
+  min-width: 80px;
+  height: 8px;
+  -webkit-appearance: none;
+  appearance: none;
+  background: var(--surface2);
+  border-radius: 4px;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.speed {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  min-width: 2.5rem;
+}
+
+.restricted {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}

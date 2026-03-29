@@ -1,0 +1,16 @@
+{
+  "name": "niletron",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smart Home Automation - NILE University Final Year Project",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "dev:backend": "npm run dev -w backend",
+    "dev:frontend": "npm run dev -w frontend",
+    "build:frontend": "npm run build -w frontend",
+    "start:backend": "npm run start -w backend"
+  }
+}
