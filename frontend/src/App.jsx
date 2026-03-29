@@ -9,6 +9,7 @@ import { AdminRooms } from './modules/admin/AdminRooms.jsx';
 import { AdminDevices } from './modules/admin/AdminDevices.jsx';
 import { AdminBoards } from './modules/admin/AdminBoards.jsx';
 import { AdminUsers } from './modules/admin/AdminUsers.jsx';
+import { AdminBackup } from './modules/admin/AdminBackup.jsx';
 
 function PrivateRoute({ children, roles }) {
   const { user, loading } = useAuth();
@@ -62,6 +63,14 @@ export default function App() {
           element={
             <PrivateRoute roles={['admin']}>
               <AdminUsers />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="admin/backup"
+          element={
+            <PrivateRoute roles={['admin']}>
+              <AdminBackup />
             </PrivateRoute>
           }
         />

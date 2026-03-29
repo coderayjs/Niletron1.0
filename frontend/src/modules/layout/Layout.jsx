@@ -55,6 +55,7 @@ export function Layout() {
               <NavLink to="/admin/devices" onClick={() => setMenuOpen(false)}>Devices</NavLink>
               <NavLink to="/admin/boards" onClick={() => setMenuOpen(false)}>Boards</NavLink>
               <NavLink to="/admin/users" onClick={() => setMenuOpen(false)}>Users</NavLink>
+              <NavLink to="/admin/backup" onClick={() => setMenuOpen(false)}>Backup</NavLink>
             </>
           )}
         </nav>

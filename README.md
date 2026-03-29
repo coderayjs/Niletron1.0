@@ -2,6 +2,8 @@
 
 Final year project (Postgraduate Diploma, Software Engineering, NILE University, Nigeria): design and development of a **Smart Home Automation** web application with ESP32 hardware proof of concept.
 
+**Repository:** [github.com/coderayjs/Niletron1.0](https://github.com/coderayjs/Niletron1.0)
+
 ## Features
 
 - **Progressive Web App (PWA)** – Installable on phones and desktops.
@@ -77,7 +79,7 @@ NILETRON/
 │       │   ├── auth/        # Login, register, context
 │       │   ├── dashboard/   # Home, room list
 │       │   ├── rooms/       # Room detail, device control
-│       │   ├── admin/       # Rooms, devices, boards, users (admin)
+│       │   ├── admin/       # Rooms, devices, boards, users, backup (admin)
 │       │   └── layout/      # Layout, nav
 │       └── App.jsx
 ├── esp32/
@@ -94,6 +96,9 @@ NILETRON/
 - `GET /api/boards/state?board_id=...&secret_key=...` (for ESP32, no auth)
 - `GET /api/boards`, `POST /api/boards` (admin)
 - `GET /api/users`, `POST /api/users`, `GET/PUT /api/users/:id/rooms` (admin)
+- `GET /api/admin/export-config`, `POST /api/admin/import-config` (admin) — download/upload JSON backup
+
+**Moving setup to another PC:** In the web app go to **Admin → Backup**, export a JSON file, copy it to the other machine, start the backend there, run the app, sign in as admin, and **Import** the same file. Your ESP32 `config.h` can stay the same if the API URL and board secrets match the imported data.
 
 ## PWA icons
 

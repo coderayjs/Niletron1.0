@@ -62,4 +62,7 @@ export const usersApi = {
 
 export const adminApi = {
   resetDb: () => api('/admin/reset-db', { method: 'POST' }),
+  exportConfig: () => api('/admin/export-config'),
+  importConfig: (body) =>
+    api('/admin/import-config', { method: 'POST', body: JSON.stringify(body) }),
 };

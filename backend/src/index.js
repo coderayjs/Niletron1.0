@@ -9,12 +9,13 @@ import devicesRoutes from './routes/devices.js';
 import boardsRoutes from './routes/boards.js';
 import usersRoutes from './routes/users.js';
 import * as boardService from './services/boardService.js';
+import * as configExportService from './services/configExportService.js';
 
 getDb();
 
 const app = express();
 app.use(cors({ origin: true, credentials: true }));
-app.use(express.json());
+app.use(express.json({ limit: '2mb' }));
 
 // Root: show API is running when visiting the base URL
 app.get('/', (_, res) => {
@@ -64,6 +65,25 @@ app.post('/api/admin/reset-db', authRequired, requireRole('admin'), (req, res) =
   } catch (e) {
     console.error(e);
     res.status(500).json({ error: 'Reset failed' });
+  }
+});
+
+app.get('/api/admin/export-config', authRequired, requireRole('admin'), (req, res) => {
+  try {
+    const data = configExportService.exportFullConfig();
+    res.json(data);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: 'Export failed' });
+  }
+});
+
+app.post('/api/admin/import-config', authRequired, requireRole('admin'), (req, res) => {
+  try {
+    const result = configExportService.importFullConfig(req.body);
+    res.json(result);
+  } catch (e) {
+    res.status(400).json({ error: e.message || 'Import failed' });
   }
 });
 
