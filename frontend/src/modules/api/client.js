@@ -1,4 +1,7 @@
-const API_BASE = '/api';
+// Local dev: Vite proxies /api → backend. Production: set VITE_API_URL to your Render URL (no trailing slash).
+const API_BASE = import.meta.env.VITE_API_URL
+  ? `${String(import.meta.env.VITE_API_URL).replace(/\/$/, '')}/api`
+  : '/api';
 
 function getToken() {
   return localStorage.getItem('niletron_token');
@@ -17,7 +20,9 @@ export async function api(path, options = {}) {
   if (!res.ok) {
     const msg = data.error || res.statusText || 'Request failed';
     if (res.status === 404) throw new Error(msg + (data.path ? ` (${data.path})` : ''));
-    if (res.status === 502 || res.status === 503) throw new Error('Backend unreachable. Is the server running on port 4000?');
+    if (res.status === 502 || res.status === 503) {
+      throw new Error('Backend unreachable. Check that the API is running and VITE_API_URL is correct.');
+    }
     throw new Error(msg);
   }
   return data;

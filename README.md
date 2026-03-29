@@ -30,7 +30,7 @@ npm install
 npm run dev
 ```
 
-Runs at **http://localhost:4000**. Default admin: `admin@niletron.local` / `admin123`.
+Runs at **http://localhost:4009** (or `PORT` from `.env`). Default admin: `admin@niletron.local` / `admin123`.
 
 ### 2. Frontend
 
@@ -99,6 +99,39 @@ NILETRON/
 - `GET /api/admin/export-config`, `POST /api/admin/import-config` (admin) — download/upload JSON backup
 
 **Moving setup to another PC:** In the web app go to **Admin → Backup**, export a JSON file, copy it to the other machine, start the backend there, run the app, sign in as admin, and **Import** the same file. Your ESP32 `config.h` can stay the same if the API URL and board secrets match the imported data.
+
+## Host backend on Render
+
+1. Push this repo to GitHub.
+2. In [Render](https://render.com): **New → Blueprint** (select `render.yaml`) **or** **Web Service** with:
+   - **Root directory:** `backend`
+   - **Build:** `npm install`
+   - **Start:** `npm start`
+   - **Health check path:** `/api/health`
+3. **Environment variables:**
+   - `NODE_ENV` = `production`
+   - `JWT_SECRET` = long random string (Blueprint can generate one)
+4. Copy your service URL, e.g. `https://niletron-api-xxxx.onrender.com`.
+
+**SQLite on the free tier:** The database file lives on disk that can be wiped on redeploys. Use **Admin → Backup** before redeploys, or add a Render **persistent disk** and set `DB_PATH` to a path on that disk (see Render docs).
+
+**Cold starts:** Free web services sleep; the first request after idle can take ~50s. ESP32 polling may see timeouts until the service wakes.
+
+### Point the frontend at Render
+
+When you build or run the PWA against the hosted API, set:
+
+```bash
+VITE_API_URL=https://YOUR-SERVICE.onrender.com npm run build
+```
+
+Or add `VITE_API_URL` in Vercel / Netlify / Render static site environment variables, then rebuild.
+
+Local `npm run dev` keeps using the Vite proxy to `localhost:4009` unless you set `VITE_API_URL` in `frontend/.env.local`.
+
+### ESP32
+
+In `esp32/include/config.h`, set `API_BASE_URL` to your Render URL (no trailing slash), e.g. `https://niletron-api-xxxx.onrender.com`.
 
 ## PWA icons
 
