@@ -20,7 +20,7 @@ export function Register() {
     setLoading(true);
     try {
       await register({ email, password, name, role });
-      navigate('/', { replace: true });
+      navigate('/', { replace: true, state: { welcomeToast: 'register' } });
     } catch (err) {
       setError(err.message || 'Registration failed');
     } finally {

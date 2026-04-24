@@ -18,7 +18,7 @@ export function Login() {
     setLoading(true);
     try {
       await login(email, password);
-      navigate('/', { replace: true });
+      navigate('/', { replace: true, state: { welcomeToast: 'login' } });
     } catch (err) {
       setError(err.message || 'Login failed');
     } finally {

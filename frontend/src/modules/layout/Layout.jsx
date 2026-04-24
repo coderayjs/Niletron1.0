@@ -1,13 +1,26 @@
-import React, { useState } from 'react';
-import { Outlet, NavLink, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Outlet, NavLink, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../auth/AuthContext.jsx';
 import { NiletronLogo } from '../auth/NiletronLogo.jsx';
+import { WelcomeModal } from '../ui/WelcomeModal.jsx';
 import styles from './Layout.module.css';
 
 export function Layout() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [welcomeOpen, setWelcomeOpen] = useState(null);
+
+  useEffect(() => {
+    const w = location.state?.welcomeToast;
+    if (w !== 'login' && w !== 'register') return;
+    setWelcomeOpen(w);
+    navigate(
+      { pathname: location.pathname, search: location.search, hash: location.hash },
+      { replace: true, state: null }
+    );
+  }, [location.state, location.pathname, location.search, location.hash, navigate]);
 
   const isAdmin = user?.role === 'admin';
 
@@ -81,6 +94,14 @@ export function Layout() {
       <main className={styles.main}>
         <Outlet />
       </main>
+
+      {welcomeOpen && (
+        <WelcomeModal
+          variant={welcomeOpen}
+          userName={user?.name}
+          onContinue={() => setWelcomeOpen(null)}
+        />
+      )}
     </div>
   );
 }
