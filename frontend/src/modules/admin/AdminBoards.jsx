@@ -73,11 +73,13 @@ export function AdminBoards() {
 
   async function save(e) {
     e.preventDefault();
+    const { name } = form;
     try {
       const board = await boardsApi.create(form);
       setModal(false);
       setShowSecret(board);
       load();
+      setToast({ message: `Board "${name}" added.`, type: 'success' });
     } catch (err) {
       setToast({ message: err.message, type: 'error' });
     }

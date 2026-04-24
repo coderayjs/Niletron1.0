@@ -59,6 +59,7 @@ export function AdminDevices() {
 
   async function save(e) {
     e.preventDefault();
+    const { name } = form;
     const payload = {
       ...form,
       room_id: Number(form.room_id),
@@ -68,8 +69,10 @@ export function AdminDevices() {
     try {
       if (modal === 'add') {
         await devicesApi.create(payload);
+        setToast({ message: `Device "${name}" added.`, type: 'success' });
       } else {
         await devicesApi.update(modal.id, payload);
+        setToast({ message: `Device "${name}" updated.`, type: 'success' });
       }
       setModal(null);
       load();
