@@ -32,11 +32,14 @@ export function AdminRooms() {
 
   async function save(e) {
     e.preventDefault();
+    const { name } = form;
     try {
       if (modal === 'add') {
         await roomsApi.create(form);
+        setToast({ message: `Room "${name}" added.`, type: 'success' });
       } else {
         await roomsApi.update(modal.id, form);
+        setToast({ message: `Room "${name}" updated.`, type: 'success' });
       }
       setModal(null);
       load();
